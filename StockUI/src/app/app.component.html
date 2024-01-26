@@ -1,0 +1,29 @@
+<button class="btn" on-click="getSotockInfo()">取得股票</button>
+<div>
+  Selection:
+  <span id="selectedRows"></span>
+</div>
+<div *ngIf="readyToGetstockInfo">
+  <button class="btn" on-click="getSotockRevenue()">取得股票營收</button>
+</div>
+<div>
+  <ag-grid-angular
+    style="height: 400px; width: 50%; float: left;"
+    [class]="themeClass"
+    [rowData]="rowData"
+    [columnDefs]="colDefs"
+    [rowSelection]="rowSelection"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+    >
+  </ag-grid-angular>
+</div>
+<div>
+  <highcharts-chart
+    [Highcharts] = "Highcharts"
+    [options] = "chartOptions"
+    [(update)]="updateFlag"
+    style = "width: 50%; height: 400px; display: block; float: left;">
+  </highcharts-chart>
+  <button (click)="handleUpdate()">Update chart</button>
+</div>
