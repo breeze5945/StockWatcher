@@ -96,7 +96,10 @@ def getstockId():
     StockInfo = json.dumps(stockInfo)
     print("getstockId finished ... ")
     return StockInfo
-
+@app.route('/data/sleep', methods=['GET'])
+def stocksleep():
+    time.sleep(5)
+    return {'stocksleep': "True"}
 @app.route('/data/stockRevenue', methods=['GET','POST'])
 def stock_report():
     stockId = ""

@@ -1,29 +1,55 @@
-<button class="btn" on-click="getSotockInfo()">取得股票</button>
-<div>
-  Selection:
-  <span id="selectedRows"></span>
-</div>
-<div *ngIf="readyToGetstockInfo">
-  <button class="btn" on-click="getSotockRevenue()">取得股票營收</button>
-</div>
-<div>
-  <ag-grid-angular
-    style="height: 400px; width: 50%; float: left;"
-    [class]="themeClass"
-    [rowData]="rowData"
-    [columnDefs]="colDefs"
-    [rowSelection]="rowSelection"
-    (selectionChanged)="onSelectionChanged($event)"
-    (gridReady)="onGridReady($event)"
-    >
-  </ag-grid-angular>
-</div>
-<div>
-  <highcharts-chart
-    [Highcharts] = "Highcharts"
-    [options] = "chartOptions"
-    [(update)]="updateFlag"
-    style = "width: 50%; height: 400px; display: block; float: left;">
-  </highcharts-chart>
-  <button (click)="handleUpdate()">Update chart</button>
-</div>
+
+<mat-card>
+  <mat-card-content>
+    <h2>Stock Watcher</h2>
+
+    <div *ngIf="loading; else content">
+      <div class="spinner__loading">
+        <div>
+          <mat-progress-spinner
+            diameter="60"
+            [value]="value"
+            mode="indeterminate">
+            </mat-progress-spinner>
+            <div style="position: relative; left: -25px"><h4>Loading in progress</h4></div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #content>
+      <!-- Here is where your loaded content goes! -->
+      <div>
+        <div>
+          Selection:
+          <span id="selectedRows"></span>
+        </div>
+        <div>
+          <ag-grid-angular
+            style="height: 400px; width: 50%; float: left;"
+            [class]="themeClass"
+            [rowData]="rowData"
+            [columnDefs]="colDefs"
+            [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)"
+            (gridReady)="onGridReady($event)"
+            >
+          </ag-grid-angular>
+        </div>
+        <div>
+          <highcharts-chart
+            [Highcharts] = "Highcharts"
+            [options] = "chartOptions"
+            [(update)]="updateFlag"
+            style = "width: 50%; height: 400px; display: block; float: left;">
+          </highcharts-chart>
+          <button (click)="handleUpdate()">Update chart</button>
+        </div>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
+
+
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,3 +1,14 @@
 p {
   font-family: Lato;
 }
+.content {
+  padding: 16px;
+}
+
+button {
+  margin: 8px;
+}
+.spinner__loading {
+  display: flex;
+  justify-content: center;
+}
